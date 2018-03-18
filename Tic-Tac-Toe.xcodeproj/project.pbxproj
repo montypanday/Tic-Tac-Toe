@@ -12,6 +12,9 @@
 		5D05C43D20577F8C008F56AF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D05C43B20577F8C008F56AF /* Main.storyboard */; };
 		5D05C43F20577F8C008F56AF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5D05C43E20577F8C008F56AF /* Assets.xcassets */; };
 		5D05C44220577F8C008F56AF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5D05C44020577F8C008F56AF /* LaunchScreen.storyboard */; };
+		E4AA3C4A205BE10A00F6203B /* GridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AA3C49205BE10A00F6203B /* GridViewController.swift */; };
+		E4AA3C4C205BE41000F6203B /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AA3C4B205BE41000F6203B /* Game.swift */; };
+		E4AA3C4E205BE43900F6203B /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4AA3C4D205BE43900F6203B /* Player.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +25,9 @@
 		5D05C43E20577F8C008F56AF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5D05C44120577F8C008F56AF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5D05C44320577F8C008F56AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E4AA3C49205BE10A00F6203B /* GridViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GridViewController.swift; path = ../GridViewController.swift; sourceTree = "<group>"; };
+		E4AA3C4B205BE41000F6203B /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		E4AA3C4D205BE43900F6203B /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,9 +60,12 @@
 		5D05C43620577F8C008F56AF /* Tic-Tac-Toe */ = {
 			isa = PBXGroup;
 			children = (
+				E4AA3C49205BE10A00F6203B /* GridViewController.swift */,
 				5D05C43720577F8C008F56AF /* AppDelegate.swift */,
 				5D05C43920577F8C008F56AF /* ViewController.swift */,
 				5D05C43B20577F8C008F56AF /* Main.storyboard */,
+				E4AA3C4B205BE41000F6203B /* Game.swift */,
+				E4AA3C4D205BE43900F6203B /* Player.swift */,
 				5D05C43E20577F8C008F56AF /* Assets.xcassets */,
 				5D05C44020577F8C008F56AF /* LaunchScreen.storyboard */,
 				5D05C44320577F8C008F56AF /* Info.plist */,
@@ -138,6 +147,9 @@
 			files = (
 				5D05C43A20577F8C008F56AF /* ViewController.swift in Sources */,
 				5D05C43820577F8C008F56AF /* AppDelegate.swift in Sources */,
+				E4AA3C4A205BE10A00F6203B /* GridViewController.swift in Sources */,
+				E4AA3C4E205BE43900F6203B /* Player.swift in Sources */,
+				E4AA3C4C205BE41000F6203B /* Game.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
