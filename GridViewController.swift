@@ -8,12 +8,12 @@
 
 import UIKit
 
-class GridViewController: UIViewController {
+class GridViewController: UIViewController{
     
     var game: Game
     
     var clicked: [Int]
-
+    
     @IBOutlet weak var restartButton: UIButton!
     
     @IBOutlet weak var winnerLabel: UILabel!
@@ -21,22 +21,12 @@ class GridViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         restartButton.isHidden = true
-        print("View Did Load")
-        print(game.autoMode)
-        print("view did load end")
-        
-        // Do any additional setup after loading the view.
     }
     
     @IBAction func restartGame(_ sender: UIButton) {
-        print("Restarting game")
         self.clicked = [Int]()
         clicked.append(0)
-        var shouldEnableAutoMode = false
-        if(game.autoMode){
-            shouldEnableAutoMode = true
-        }
-        self.game = Game(player1: "player1", player2: "player2", size: 4, autoMode: shouldEnableAutoMode)
+        self.game = Game(player1: "player1", player2: "player2", size: 4, autoMode: game.autoMode)
         for tag in 1...(game.gameSize * game.gameSize){
             let tmpButton = self.view.viewWithTag(tag) as? UIButton
             tmpButton?.setImage(nil, for: .normal)
@@ -50,45 +40,33 @@ class GridViewController: UIViewController {
         self.game = Game(player1: "player1", player2: "player2", size: 4, autoMode: false)
         self.clicked = [Int]()
         clicked.append(0)
-        
         super.init(coder: aDecoder)
     }
     
     @IBAction func handleClick(_ sender: UIButton) {
-        if(!clicked.contains(sender.tag)){
-            if(!game.finished){
-                clicked.append(sender.tag)
-                setImageAndCurrentPlayer(sender: sender)
-                game.update(tag: sender.tag)
-                checkIfWin()
-                if(game.autoMode){
-                    print("AI is working")
-                    
-                    if(clicked.count != ((game.gameSize * game.gameSize) + 1 )){
-                        var randomButtonTag = 100
-                        var found = false
-                        while (!found){
-                            randomButtonTag = Int(arc4random_uniform(UInt32(game.gameSize * game.gameSize)))
-                            if(!clicked.contains(randomButtonTag)){
-                                found = true
-                            }
-                        }
-                        print("Already Clicked Buttons \(clicked)")
-                        print("random button selected is\(randomButtonTag)")
-                        let randomButton = self.view.viewWithTag(randomButtonTag) as! UIButton
-                     
-                        setImageAndCurrentPlayer(sender: randomButton)
-                        game.update(tag: randomButtonTag)
-                        checkIfWin()
-                        clicked.append(randomButtonTag)
+        if(!clicked.contains(sender.tag) && (!game.finished)){
+            playTurn(sender: sender)
+            restartButton.isHidden = false
+            if(game.autoMode && clicked.count != ((game.gameSize * game.gameSize) + 1 )){
+                var randomButtonTag = 100
+                var found = false
+                while (!found){
+                    randomButtonTag = Int(arc4random_uniform(UInt32(game.gameSize * game.gameSize)))
+                    if(!clicked.contains(randomButtonTag)){
+                        found = true
                     }
-                    
-                    
                 }
-                
+                let randomButton = self.view.viewWithTag(randomButtonTag) as! UIButton
+                playTurn(sender: randomButton)
             }
-           restartButton.isHidden = false
         }
+    }
+    
+    func playTurn(sender: UIButton){
+        clicked.append(sender.tag)
+        setImageAndCurrentPlayer(sender: sender)
+        game.update(tag: sender.tag)
+        checkIfWin()
     }
     
     func checkIfWin(){
@@ -98,18 +76,16 @@ class GridViewController: UIViewController {
     }
     
     func setImageAndCurrentPlayer(sender: UIButton){
-        print("current player is \(game.currentPlayer)")
-        if(game.currentPlayer == 0){
+        switch game.currentPlayer {
+        case 0:
             sender.setImage(UIImage(named: "zero"), for: .normal)
             game.currentPlayer = 1
-            
-        }else{
+            break
+        case 1:
             sender.setImage(UIImage(named: "cross"), for: .normal)
             game.currentPlayer = 0
+            break
+        default: break
         }
-    }
-    
-    func initializeClicked(){
-        
     }
 }

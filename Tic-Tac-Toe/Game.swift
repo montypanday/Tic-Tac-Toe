@@ -25,8 +25,6 @@ class Game {
     let digit2 = 100
     
     init(player1: String, player2: String, size: Int, autoMode: Bool) {
-        print("Game Mode")
-        print(autoMode)
         self.player1 = Player(name: player1)
         self.player2 = Player(name: player2)
         self.gameSize = size
@@ -79,15 +77,18 @@ class Game {
     }
     
     func checkWin(score: Int){
-        if(score == (digit1 * gameSize)){
+        switch score {
+        case (digit1 * gameSize):
             finished = true
             winner = player1
             print("Player 1 won the game")
-        }
-        if(score == (digit2 * gameSize)){
+            break
+        case (digit2 * gameSize):
             finished = true
             winner = player2
             print("Player 2 won the game")
+            break
+        default: break
         }
     }
     
@@ -99,7 +100,6 @@ class Game {
             }
             checkWin(score: tempScore)
         }
-        
     }
     
     func checkDiagonals(){
