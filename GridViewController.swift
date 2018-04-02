@@ -14,6 +14,8 @@ class GridViewController: UIViewController{
     
     var clicked: [Int]
     
+    @IBOutlet var buttons: [UIButton]!
+    
     @IBOutlet weak var restartButton: UIButton!
     
     @IBOutlet weak var winnerLabel: UILabel!
@@ -27,9 +29,8 @@ class GridViewController: UIViewController{
         self.clicked = [Int]()
         clicked.append(0)
         self.game = Game(player1: "player1", player2: "player2", size: 4, autoMode: game.autoMode)
-        for tag in 1...(game.gameSize * game.gameSize){
-            let tmpButton = self.view.viewWithTag(tag) as? UIButton
-            tmpButton?.setImage(nil, for: .normal)
+        for button in buttons{
+            button.setImage(nil, for: .normal)
         }
         restartButton.isHidden = true
         winnerLabel.text = ""
@@ -47,7 +48,7 @@ class GridViewController: UIViewController{
         if(!clicked.contains(sender.tag) && (!game.finished)){
             playTurn(sender: sender)
             restartButton.isHidden = false
-            if(game.autoMode && clicked.count != ((game.gameSize * game.gameSize) + 1 )){
+            if(game.autoMode && clicked.count != ((game.gameSize * game.gameSize) + 1 ) && !game.finished){
                 var randomButtonTag = 100
                 var found = false
                 while (!found){
@@ -78,11 +79,11 @@ class GridViewController: UIViewController{
     func setImageAndCurrentPlayer(sender: UIButton){
         switch game.currentPlayer {
         case 0:
-            sender.setImage(UIImage(named: "zero"), for: .normal)
+            sender.setImage(#imageLiteral(resourceName: "zero"), for: .normal)
             game.currentPlayer = 1
             break
         case 1:
-            sender.setImage(UIImage(named: "cross"), for: .normal)
+            sender.setImage(#imageLiteral(resourceName: "cross"), for: .normal)
             game.currentPlayer = 0
             break
         default: break
